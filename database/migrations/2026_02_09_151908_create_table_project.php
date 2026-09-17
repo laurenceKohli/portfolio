@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->string('title')->unique();
             $table->date('date');
-            $table->integer('duration')->nullable();
+            $table->text('duration')->nullable();
             $table->string('url')->nullable();
 
             $table->text('goals');
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->text('team')->nullable();
             $table->text('contribution');
             $table->text('proud')->nullable();
+            $table->boolean('on_home_page')->default(false);
 
             $table->timestamps();
             
