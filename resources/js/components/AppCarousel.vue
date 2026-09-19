@@ -39,7 +39,7 @@ const prevImage = () => {
             aria-label="Image précédente"
             @click="prevImage"
         />
-        <img :src="images[currentImage]" alt="Image du projet" />
+        <img :src="`/img/projects/${images[currentImage]}`" alt="Image du projet" />
         <BaseButton
             class="carousel-btn next"
             size="icon"
@@ -67,7 +67,7 @@ const prevImage = () => {
 }
 
 .carousel img {
-    @apply block max-w-full max-h-full w-auto h-auto object-contain;
+    @apply block max-w-full max-h-[85%] w-auto h-auto object-contain rounded-lg;
 }
 
 .carousel-btn {
@@ -82,7 +82,7 @@ const prevImage = () => {
     @apply right-4;
 }
 .dots {
-    @apply absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2;
+    @apply absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2;
 }
 
 .dots span {

@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
          $project2 = Project::create([
-            'tag_id' => 2,
+            'tag_id' => $tag->id,
             'title' => 'Une histoire d\'Harry Potter',
             'date' => '2025-01-15',
             'duration' => 'automne 2024',
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Scrollama', 'logo_path' => 'scrollama.png'],
         ]);
 
-        $project2->exp()->createMany([
+        $project2->exps()->createMany([
             ['name' => 'Scrollytelling'],
             ['name' => 'Scrollama et GSAP'],
             ['name' => 'D3 : selection, array, axis, scale, transition'],
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Travail en équipe'],
         ]);
 
-        $project2->imgs()->create([
+        $project2->imgs()->createMany([
             ['img_path' => 'HP-bento.png'],
             ['img_path' => 'HP-vifOr.png'],
             ['img_path' => 'HP-dataVis.png'],

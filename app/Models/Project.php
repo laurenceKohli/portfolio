@@ -9,7 +9,7 @@ class Project extends Model
     protected $table='table_projects';
     protected $fillable = [
         'tag_id', 'title', 'date', 'duration', 'url',
-        'goals', 'desc', 'team', 'contribution', 'proud'
+        'goals', 'desc', 'team', 'contribution', 'proud', 'on_home_page'
     ];
 
     public function tag()

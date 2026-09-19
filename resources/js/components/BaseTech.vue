@@ -17,10 +17,10 @@ const props = defineProps({
 @reference "#app.css";
 
 .base-tech {
-  @apply rounded-[50px] bg-tertiary px-1.25 py-0.5 flex justify-center items-center gap-1.25;
+  @apply rounded-[50px] bg-tertiary px-2 py-1 flex justify-center items-center gap-1.25;
 }
 
 .tech-label {
-  @apply text-center text-[9px] font-normal leading-3 text-onTertiary;
+  @apply text-center text-2xs md:text-xs font-normal leading-3 text-onTertiary;
 }
 </style>

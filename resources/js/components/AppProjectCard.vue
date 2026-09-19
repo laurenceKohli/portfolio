@@ -37,14 +37,13 @@ if (props.project.imgs) {
 
 <template>
   <div class="project-card">
-    <img class="project-image" :src="`/img/projects/${img}.png`" />
+    <img class="project-image" :src="`/img/projects/${img}`" />
     <div class="project-content">
       <div class="project-text-block">
         <div class="project-title">
           {{ props.project.title }}
         </div>
-        <div class="project-description">
-          {{ props.project.desc }}
+        <div class="project-description" v-html="props.project.desc">
         </div>
       </div>
       <div class="project-techs">
@@ -81,8 +80,8 @@ if (props.project.imgs) {
     @apply w-full text-center text-base font-semibold leading-6;
   }
 
-  .project-description {
-    @apply text-xs font-normal leading-4 text-onSurface2;
+  .project-description :deep(> p) {
+    @apply text-xs font-normal leading-4 text-onSurface2 pb-1;
   }
 
   .project-techs {

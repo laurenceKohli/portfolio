@@ -28,7 +28,7 @@
 
     .base-filtre {
         @apply inline-flex justify-center items-center gap-1;
-        @apply w-20 px-1 py-0.5 rounded-[50px] ;
+        @apply w-20 px-2 py-1 rounded-[50px] ;
         @apply outline outline-1 outline-offset-[-1px] outline-tertiary;
     }
 
