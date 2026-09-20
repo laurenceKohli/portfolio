@@ -17,10 +17,10 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::get('/', function () {
-    return Inertia::render('Home');
-});
+Route::get('/', [HomeController::class, 'home'])->name('home');
+// Route::get('/', function () {
+//     return Inertia::render('Home');
+// });
 
 Route::resource("/projects",ProjectController::class)->only(['index', 'show']);
 

@@ -13,6 +13,10 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    diffMobile:{
+        type: Boolean,
+        default: false,
+    }
 })
 
 </script>
@@ -24,7 +28,7 @@ const props = defineProps({
             :style="{ '--title-color': `var(--color-${props.color})` }"
             v-html="title"
         ></span>
-        <span
+        <span v-if="!diffMobile"
             class="app-icon-in-title"
             role="img"
             :aria-label="icon"
