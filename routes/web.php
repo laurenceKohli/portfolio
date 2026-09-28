@@ -18,13 +18,14 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
-// Route::get('/', function () {
-//     return Inertia::render('Home');
-// });
 
 Route::resource("/projects",ProjectController::class)->only(['index', 'show']);
 
 require __DIR__.'/settings.php';
+
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+});
 
 // Maintenance
 

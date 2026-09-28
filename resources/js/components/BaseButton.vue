@@ -104,7 +104,7 @@ const buttonClass = computed(() => {
 }
 
 .button-icon-box {
-  @apply size-3.5 bg-tertiary flex items-center justify-center;
+  @apply size-3.5 flex items-center justify-center;
 }
 
 .button-icon-text {
