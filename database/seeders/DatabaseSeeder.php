@@ -31,8 +31,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $project->techs()->createMany([
-            ['name' => 'Laravel', 'logo_path' => 'laravel.png'],
-            ['name' => 'Vue.js', 'logo_path' => 'vue.png'],
+            ['name' => 'Laravel', 'logo_path' => 'laravel.svg'],
+            ['name' => 'Vue.js', 'logo_path' => 'vue.svg'],
         ]);
 
         $project->imgs()->create([
@@ -54,8 +54,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $project2->techs()->createMany([
-            ['name' => 'GSAP', 'logo_path' => 'gsap.png'],
-            ['name' => 'D3.js', 'logo_path' => 'd3.png'],
+            ['name' => 'GSAP', 'logo_path' => 'gsap.svg'],
+            ['name' => 'D3.js', 'logo_path' => 'd3.svg'],
             ['name' => 'Scrollama', 'logo_path' => 'scrollama.png'],
         ]);
 

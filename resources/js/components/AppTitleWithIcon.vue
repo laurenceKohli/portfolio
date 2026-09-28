@@ -12,10 +12,6 @@ const props = defineProps({
     title: {
         type: String,
         default: '',
-    },
-    diffMobile:{
-        type: Boolean,
-        default: false,
     }
 })
 
@@ -28,7 +24,7 @@ const props = defineProps({
             :style="{ '--title-color': `var(--color-${props.color})` }"
             v-html="title"
         ></span>
-        <span v-if="!diffMobile"
+        <span
             class="app-icon-in-title"
             role="img"
             :aria-label="icon"
@@ -45,7 +41,7 @@ const props = defineProps({
     @reference "#app.css";
 
     h1 {
-        @apply flex items-center md:justify-center gap-3;
+        @apply flex items-center md:justify-center gap-4 mb-4;
     }
 
     .title-content {
@@ -53,7 +49,7 @@ const props = defineProps({
     }
 
     .app-icon-in-title {
-        @apply inline-block size-10 shrink-0 bg-primary;
+        @apply inline-block size-12 shrink-0 bg-primary;
         background-color: var(--icon-color);
         mask: var(--icon-mask) center / contain no-repeat;
         -webkit-mask: var(--icon-mask) center / contain no-repeat;

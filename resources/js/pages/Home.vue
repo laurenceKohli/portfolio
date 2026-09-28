@@ -43,10 +43,10 @@
  
     <div id="presentation">
       <div id="perso-nav">
-        <AppButtonNav icon="projects" label="Mes projets"/>
-        <AppButtonNav icon="skills" label="Compétences"/>   
-        <AppButtonNav icon="cv" label="CV"/>
-        <AppButtonNav icon="contact" label="Me contacter"/>
+        <AppButtonNav icon="projects" label="Mes projets" href="/projects"/>
+        <AppButtonNav icon="skills" label="Compétences" href="/skills"/>   
+        <AppButtonNav icon="cv" label="CV" href="/cv"/>
+        <AppButtonNav icon="contact" label="Me contacter" href="/contact"/>
       </div>
       <div id="perso-img">
         <img src="/img/perso/perso-light.jpg" alt="Laurence Kohli" />
@@ -56,23 +56,30 @@
   </section>
 
   <section id="projects-section">
-    <AppTitleWithIcon icon="projects" color="secondary" title="Mes <span>projets</span>" diffMobile/>
+    <AppTitleWithIcon icon="projects" color="secondary" title="Mes <span>projets</span>"/>
     <p>Voici quelques uns de mes projets récents</p>
     
     <div id="projects">
-        <AppProjectCard
-            v-for="project in projects"
-            :key="project.id"
-            :project="project"
-            />
+      <div>
+          <AppProjectCard
+              v-for="project in projects"
+              :key="project.id"
+              :project="project"
+              />
+        </div>
         <BaseButton @click="$inertia.visit(`/projects`)" label="Voir d'autres projets" color="secondary-line" size="full" />
-    </div>
+     </div>
   </section>
 
   <section id="skills-section">
-    <AppTitleWithIcon icon="skills" color="primary" title="Mes <span>compétences</span>" diffMobile/>
-    <div id="skills">
-      <AppCompetence v-for="skill in skills" :key="skill.id" :icon="skill.logo_path" :label="skill.name"/>
+    <div id="skills-img">
+      <img src="/img/perso/perso-light.jpg"/>
+    </div>
+    <div id="skills-details">
+      <AppTitleWithIcon icon="skills" color="primary" title="Mes <span>compétences</span>"/>
+      <div id="skills">
+        <AppCompetence v-for="skill in skills" :key="skill.id" :icon="skill.logo_path" :label="skill.name"/>
+      </div>
     </div>
   </section>
 </template>
@@ -80,8 +87,7 @@
 <style scoped>
 @reference "#app.css";
   #perso-section{
-    @apply flex flex-col md:flex-row justify-center items-center gap-15;
-    @apply mb-25;
+    @apply md:flex-row gap-15 md:gap-20;
   }
 
   #perso-section>:first-child{
@@ -90,7 +96,7 @@
 
   #perso-accounts{
     @apply flex justify-center items-center gap-14 md:gap-1;
-    @apply mb-8;
+    @apply mb-8 md:mb-0;
   }
 
   #name{
@@ -109,19 +115,32 @@
     @apply flex flex-col items-center gap-5;
   }
 
-  #perso-img>img{
+  #perso-img>img, #skills-img>img{
     @apply block h-full rounded-lg md:h-[360px];
   }
 
   section{
-    @apply mb-9;
+    @apply mb-25 flex flex-col justify-center items-center;
+  } 
+  
+  #projects, #skills-details{
+    @apply flex flex-col justify-center items-center gap-4 md:gap-6;
+  }
+
+  #projects>:first-child, #skills{
+    @apply flex flex-wrap gap-6 justify-center;
   }
 
   #projects-section>p{
-    @apply mb-4 text-xs md:text-center;
+    @apply mb-4 md:mb-6 text-xs md:text-center;
   }
 
-  #projects, #skills{
-    @apply flex flex-wrap gap-6;
+  #skills-section{
+    @apply md:flex-row md:gap-6 md:items-start;
   }
+
+  #skills-img{
+    @apply hidden md:block;
+  }
+ 
 </style>
