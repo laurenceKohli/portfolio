@@ -5,6 +5,9 @@
   import AppButtonNav from '@/components/AppButtonNav.vue';
   import AppCompetence from '@/components/AppCompetence.vue';
   import BaseButton from '@/components/BaseButton.vue';
+  import useDarkMode from '@/composables/darkMode';
+
+  const { isDarkMode } = useDarkMode();
 
  const props = defineProps({
         projects: {
@@ -28,7 +31,7 @@
           <img src="/img/competences/linkedin.svg" alt="linkedin" />
         </a>
         <a href="https://github.com/laurenceKohli" target="_blank" rel="noopener noreferrer">
-          <img src="/img/competences/github.svg" alt="github" />
+          <span class="github-icon" :class="{ 'github-icon-dark': isDarkMode }" role="img" aria-label="GitHub" />
         </a>
       </div>
 
@@ -49,7 +52,7 @@
         <AppButtonNav icon="contact" label="Me contacter" href="/contact"/>
       </div>
       <div id="perso-img">
-        <img src="/img/perso/perso-light.jpg" alt="Laurence Kohli" />
+        <img :src="isDarkMode ? '/img/perso/perso-dark.jpg' : '/img/perso/perso-light.jpg'" alt="Laurence Kohli" />
       </div>
     </div>
 
@@ -73,7 +76,7 @@
 
   <section id="skills-section">
     <div id="skills-img">
-      <img src="/img/perso/skills-light.jpg"/>
+      <img :src="isDarkMode ? '/img/perso/skills-dark.jpg' : '/img/perso/skills-light.jpg'" alt="" />
     </div>
     <div id="skills-details">
       <AppTitleWithIcon icon="skills" color="primary" title="Mes <span>compétences</span>"/>
@@ -97,6 +100,19 @@
   #perso-accounts{
     @apply flex justify-center items-center gap-14 md:gap-1;
     @apply mb-8 md:mb-0;
+  }
+
+  .github-icon {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    background-color: currentColor;
+    mask: url('/img/competences/github.svg') center / contain no-repeat;
+    -webkit-mask: url('/img/competences/github.svg') center / contain no-repeat;
+  }
+
+  .github-icon-dark {
+    background-color: white;
   }
 
   #name{

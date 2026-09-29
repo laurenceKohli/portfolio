@@ -33,11 +33,15 @@
     }
 
     .selected {
-        @apply bg-tertiary font-bold;
+        @apply bg-tertiary font-bold ;
+    }
+
+    .selected>div{
+        @apply dark:text-onTertiary;
     }
 
     .base-filtre-label {
-        @apply text-center justify-center text-onTertiary;
+        @apply text-center justify-center text-onTertiary dark:text-onSurface2;
         @apply w-19 leading-3;
     }
 </style>

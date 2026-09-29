@@ -49,7 +49,7 @@ const buttonClass = computed(() => {
 
 .button-nav {
   @apply size-20 px-1.5 py-2 rounded-lg inline-flex flex-col justify-center items-center gap-1 border-none cursor-pointer;
-  box-shadow: 0px 4px 4px 0px rgba(155, 35, 128, 0.25);
+  box-shadow: var(--shadow-box);
   text-decoration: none;
   background: none;
 }

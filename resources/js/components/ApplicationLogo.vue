@@ -1,5 +1,7 @@
 <script setup>
-const isDarkMode = JSON.parse(localStorage.getItem('darkMode'))
+import useDarkMode from '@/composables/darkMode'
+
+const { isDarkMode } = useDarkMode()
 </script>
 
 <template>

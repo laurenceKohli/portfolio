@@ -61,7 +61,8 @@ if (props.project.imgs) {
   @reference "#app.css";
 
   .project-card {
-    @apply w-96 inline-flex flex-col justify-start items-start overflow-hidden rounded-lg shadow-box;
+    @apply w-96 inline-flex flex-col justify-start items-start overflow-hidden rounded-lg;
+    box-shadow: var(--shadow-box);
   }
 
   .project-image {

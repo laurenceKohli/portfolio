@@ -71,7 +71,8 @@ const buttonClass = computed(() => {
 }
 
 .button-icon {
-  @apply size-7 px-1.5 py-2 bg-surface rounded-lg shadow-[0px_4px_4px_0px_rgba(155,35,128,0.25)] outline outline-1 outline-offset-[-1px] outline-primary inline-flex flex-col justify-center items-center gap-1;
+  @apply size-7 px-1.5 py-2 bg-surface rounded-lg outline outline-1 outline-offset-[-1px] outline-primary inline-flex flex-col justify-center items-center gap-1;
+  box-shadow: var(--shadow-box);
 }
 
 .button-full {

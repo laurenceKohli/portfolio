@@ -3,6 +3,9 @@
  import BaseTextInput from '@/components/BaseTextInput.vue';
  import TheNav from '@/components/TheNav.vue';
  import AppTitleWithIcon from '@/components/AppTitleWithIcon.vue';
+ import useDarkMode from '@/composables/darkMode';
+
+     const { isDarkMode } = useDarkMode();
 
     const form = useForm({
         nom: '',
@@ -33,7 +36,7 @@
     
     <section id=contact-section>
         <div id="contact-img">
-        <img src="/img/perso/contact-light.jpg"/>
+        <img :src="isDarkMode ? '/img/perso/contact-dark.jpg' : '/img/perso/contact-light.jpg'" alt="" />
         </div>
 
         <div id="contact-form">

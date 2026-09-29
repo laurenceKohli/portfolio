@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
 @source "../../storage/framework/views/*.php";
@@ -78,6 +79,8 @@
     --color-onSurface2: #EDE3E4;
 
     --color-text: #ffffff;
+
+    --shadow-box: 0px 4px 4px 0px rgba(255, 255, 255, 0.25);
 }
 
 html {

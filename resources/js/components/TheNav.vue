@@ -3,8 +3,11 @@
     import BaseNavLink from './BaseNavLink.vue';
     import { onMounted, onUnmounted, ref } from 'vue'
     import { usePage } from '@inertiajs/vue3'
+    import { Moon, Sun } from 'lucide-vue-next'
+    import useDarkMode from '@/composables/darkMode'
 
     const isMobileMenuOpen = ref(false)
+    const { isDarkMode, toggleDarkMode } = useDarkMode()
     const navElement = ref(null)
     const navHeight = ref(88)
     let navResizeObserver
@@ -67,6 +70,17 @@
 
             <button
                 type="button"
+                class="theme-toggle"
+                :aria-label="isDarkMode ? 'Activer le thème clair' : 'Activer le thème sombre'"
+                :title="isDarkMode ? 'Activer le thème clair' : 'Activer le thème sombre'"
+                @click="toggleDarkMode"
+            >
+                <Sun v-if="isDarkMode" aria-hidden="true" />
+                <Moon v-else aria-hidden="true" />
+            </button>
+
+            <button
+                type="button"
                 class="mobile-menu-button"
                 :aria-expanded="isMobileMenuOpen"
                 aria-label="Ouvrir ou fermer le menu"
@@ -118,7 +132,8 @@
     .the-nav {
         @apply fixed left-1/2 top-0 z-50 -translate-x-1/2;
         @apply bg-surface dark:bg-surface p-3 mb-6;
-        @apply rounded-lg shadow-box;
+        @apply rounded-lg;
+        box-shadow: var(--shadow-box);
         width: calc(100% - 2rem);
         max-width: 80rem;
     }
@@ -133,7 +148,17 @@
 
     .mobile-menu-button {
         @apply ml-auto inline-flex items-center justify-center rounded-md p-2 md:hidden;
-        @apply rounded-lg shadow-box;
+        @apply rounded-lg;
+        box-shadow: var(--shadow-box);
+    }
+
+    .theme-toggle {
+        @apply inline-flex size-10 shrink-0 items-center justify-center rounded-lg text-text;
+        box-shadow: var(--shadow-box);
+    }
+
+    .theme-toggle :deep(svg) {
+        @apply size-5;
     }
 
     .mobile-menu-icon {

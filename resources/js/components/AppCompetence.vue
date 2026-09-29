@@ -38,7 +38,7 @@ const iconSrc = computed(() => (props.icon ? `/img/competences/${props.icon}` : 
   @apply inline-flex flex-col size-20 rounded-lg border-none;
   @apply p-2 justify-center items-center gap-2;
   @apply bg-surface text-text;
-  box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+  box-shadow: var(--shadow-box);
   text-decoration: none;
 }
 
