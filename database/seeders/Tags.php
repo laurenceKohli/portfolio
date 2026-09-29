@@ -15,28 +15,40 @@ class Tags extends Seeder
     {
         $tags = [
             [
-                'name' => 'certification',
+                'name' => 'développement',
                 'color' => '#e02626',
             ],
             [
-                'name' => 'projet de cours',
+                'name' => 'UX/design',
                 'color' => '#0d1fc2',
             ],
             [
-                'name' => 'projet professionnel',
+                'name'=> 'branding',
+                'color'=> '#34bd84',
+            ],
+            [
+                'name' => 'marketing',
                 'color' => '#FF5722',
             ],
             [
-                'name' => 'bénévolat',
+                'name' => 'communication',
                 'color' => '#24bbf7',
             ],
             [
-                'name' => 'camps',
+                'name' => 'innovation',
                 'color' => '#10e43e',
             ],
             [
-                'name' => 'default',
+                'name' => 'interdisciplinaire',
                 'color' => '#aa24f7',
+            ],
+            [
+                'name'=> 'recherche',
+                'color'=> '#bf67d5',
+            ],
+            [
+                'name'=> 'gestion de projet',
+                'color'=> '#797575',
             ],
         ];
 

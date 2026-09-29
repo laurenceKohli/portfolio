@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Tag;
 use App\Models\Project;
+use App\Models\Tech;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,10 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             Tags::class,
+            Techs::class,
             AdminUserSeeder::class,
         ]);
 
-        $tag = Tag::where('name', 'default')->first();
+        $tag = Tag::where('name', 'communication')->first();
 
         $project = Project::create([
             'tag_id' => $tag->id,
@@ -31,10 +33,7 @@ class DatabaseSeeder extends Seeder
             'on_home_page' => true
         ]);
 
-        $project->techs()->createMany([
-            ['name' => 'Laravel', 'logo_path' => 'laravel.svg'],
-            ['name' => 'Vue.js', 'logo_path' => 'vue.svg'],
-        ]);
+        $project->techs()->sync(Tech::whereIn('name', ['Laravel', 'Vue.js'])->pluck('id'));
 
         $project->imgs()->create([
             'img_path' => 'test.png',
@@ -54,11 +53,7 @@ class DatabaseSeeder extends Seeder
             'on_home_page' => true
         ]);
 
-        $project2->techs()->createMany([
-            ['name' => 'GSAP', 'logo_path' => 'gsap.svg'],
-            ['name' => 'D3.js', 'logo_path' => 'd3.svg'],
-            ['name' => 'Scrollama', 'logo_path' => 'scrollama.png'],
-        ]);
+        $project2->techs()->sync(Tech::whereIn('name', ['GSAP', 'D3.js', 'Scrollama'])->pluck('id'));
 
         $project2->exps()->createMany([
             ['name' => 'Scrollytelling'],

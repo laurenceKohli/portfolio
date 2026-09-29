@@ -156,7 +156,7 @@
   }
 
   #skills-img{
-    @apply hidden md:block;
+    @apply hidden md:block md:shrink-0;
   }
  
 </style>
