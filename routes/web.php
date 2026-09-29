@@ -6,18 +6,24 @@ use Laravel\Fortify\Features;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
 //         'canRegister' => Features::enabled(Features::registration()),
 //     ]);
 // })->name('home');
-
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::get('/', [HomeController::class, 'home'])->name('home');
+
+Route::get('dashboard', [ProjectController::class, 'dashboard'])
+    ->middleware('auth')
+    ->name('dashboard');
+
+
+Route::middleware('auth')->group(function () {
+    Route::resource('/projects', ProjectController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+});
 
 Route::resource("/projects",ProjectController::class)->only(['index', 'show']);
 

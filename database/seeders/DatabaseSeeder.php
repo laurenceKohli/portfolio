@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             Tags::class,
+            AdminUserSeeder::class,
         ]);
 
         $tag = Tag::where('name', 'default')->first();
