@@ -1,15 +1,34 @@
 <script setup>
     import ApplicationLogo from '@/components/ApplicationLogo.vue';
     import BaseNavLink from './BaseNavLink.vue';
-    import { onMounted, ref } from 'vue'
+    import { onMounted, onUnmounted, ref } from 'vue'
+    import { usePage } from '@inertiajs/vue3'
 
     const isMobileMenuOpen = ref(false)
+    const navElement = ref(null)
+    const navHeight = ref(88)
+    let navResizeObserver
+
+    const updateNavHeight = () => {
+        if (!navElement.value) {
+            return
+        }
+
+        const styles = window.getComputedStyle(navElement.value)
+        navHeight.value = navElement.value.offsetHeight + Number.parseFloat(styles.marginBottom)
+    }
+
+    onMounted(() => {
+        updateNavHeight()
+        navResizeObserver = new ResizeObserver(updateNavHeight)
+        navResizeObserver.observe(navElement.value)
+    })
+
+    onUnmounted(() => navResizeObserver?.disconnect())
 
     const navLinks = [
-        { icon: 'cv', href: '/', label: 'Accueil' },
+        { icon: 'home', href: '/', label: 'Accueil' },
         { icon: 'projects', href: '/projects', label: 'Mes projets' },
-        { icon: 'skills', href: '/skills', label: 'Compétences' },
-        { icon: 'cv', href: '/cv', label: 'CV' },
         { icon: 'contact', href: '/contact', label: 'Me contacter' },
     ]
 
@@ -21,32 +40,14 @@
         isMobileMenuOpen.value = false
     }
 
-    const addActiveClass = (path) => {
-        document
-            .querySelectorAll(`nav a[href="/${path}"]`)
-            .forEach((link) => link.querySelector('span')?.classList.add('active'))
-    }
-
-    onMounted(() => {
-        const url = window.location.pathname.split('/')
-        if (url.some((el) => el === 'home') || url.every((el) => el === '')) {
-            addActiveClass('')
-        }
-        if (url.some((el) => el === 'projects')) {
-            addActiveClass('projects')
-        }
-        if (url.some((el) => el === 'skills')) {
-            addActiveClass('skills')
-        }
-        if (url.some((el) => el === 'contact')) {
-            addActiveClass('contact')
-        }
-    })
+    const user = usePage().props.auth.user
+    const isUserLoggedIn = user && Object.keys(user).length > 0
 
 </script>
 
 <template>
-    <nav class="the-nav box-shadow-sm">
+    <div class="nav-space" :style="{ height: `${navHeight}px` }" aria-hidden="true"></div>
+    <nav ref="navElement" class="the-nav box-shadow-sm">
         <div class="nav-content">
             <ApplicationLogo />
 
@@ -58,6 +59,9 @@
                     :href="link.href"
                 >
                     {{ link.label }}
+                </BaseNavLink>
+                <BaseNavLink v-if="isUserLoggedIn" icon="dashboard" href="/dashboard">
+                    Dashboard
                 </BaseNavLink>
             </div>
 
@@ -112,9 +116,11 @@
     @reference "#app.css";
 
     .the-nav {
-        @apply sticky top-4 z-50 w-full;
+        @apply fixed left-1/2 top-0 z-50 -translate-x-1/2;
         @apply bg-surface dark:bg-surface p-3 mb-6;
         @apply rounded-lg shadow-box;
+        width: calc(100% - 2rem);
+        max-width: 80rem;
     }
 
     .nav-content {
@@ -122,7 +128,7 @@
     }
 
     .desktop-links {
-        @apply ml-auto hidden items-center gap-4 md:flex;
+        @apply ml-auto hidden items-center gap-6 md:flex;
     }
 
     .mobile-menu-button {

@@ -21,6 +21,9 @@ const props = defineProps({
 })
 
 const iconSrc = computed(() => (props.icon ? `/img/icons/${props.icon}.svg` : ''))
+const iconStyle = computed(() => ({
+  '--button-nav-icon-mask': `url('${iconSrc.value}')`,
+}))
 
 const buttonClass = computed(() => {
   return {
@@ -34,12 +37,7 @@ const buttonClass = computed(() => {
   <a :href="href" :data-type="type" class="button-nav" :class="buttonClass">
     <div class="button-nav-frame">
       <span class="button-nav-icon-wrapper">
-        <img
-          v-if="icon"
-          :src="iconSrc"
-          :alt="`Icone ${icon}`"
-          class="button-nav-icon-image"
-        />
+        <span v-if="icon" class="button-nav-icon-image" :style="iconStyle" aria-hidden="true"></span>
       </span>
     </div>
     <div class="button-nav-label breadcrumb">{{ label }}</div>
@@ -73,7 +71,9 @@ const buttonClass = computed(() => {
 }
 
 .button-nav-icon-image {
-  @apply w-full h-full object-contain;
+  @apply size-full bg-current;
+  mask: var(--button-nav-icon-mask) center / contain no-repeat;
+  -webkit-mask: var(--button-nav-icon-mask) center / contain no-repeat;
 }
 
 .button-nav-label {

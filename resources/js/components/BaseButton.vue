@@ -52,11 +52,11 @@ const buttonClass = computed(() => {
     </template>
     <template v-if="icon">
       <span v-if="size === 'icon'" class="button-icon-box" aria-hidden="true">
-        <img v-if="hasImageIcon" :src="iconSrc" :alt="`Icone ${icon}`" class="button-icon-image" />
+        <span v-if="hasImageIcon" class="button-icon-image" :style="{ '--button-icon-mask': `url('${iconSrc}')` }" />
         <span v-else class="button-icon-text">{{ icon }}</span>
       </span>
       <template v-else>
-        <img v-if="hasImageIcon" :src="iconSrc" :alt="`Icone ${icon}`" class="button-icon-image" />
+        <span v-if="hasImageIcon" class="button-icon-image" :style="{ '--button-icon-mask': `url('${iconSrc}')` }" aria-hidden="true" />
         <span v-else class="button-icon-text" aria-hidden="true">{{ icon }}</span>
       </template>
     </template>
@@ -76,7 +76,12 @@ const buttonClass = computed(() => {
 
 .button-full {
   width: fit-content;
-  @apply px-4 py-2
+  @apply px-4 py-2;
+}
+
+.button-label {
+  @apply flex-1 text-center text-base font-normal leading-6;
+  font-family: 'Yatra One', cursive;
 }
 
 .button-primary {
@@ -94,13 +99,11 @@ const buttonClass = computed(() => {
   @apply outline-solid outline-2 -outline-offset-2 outline-secondary;
 }
 
-.button-label {
-  @apply flex-1 text-center text-base font-normal leading-6 text-OnSecondary;
-  font-family: 'Yatra One', cursive;
-}
 
 .button-icon-image {
-  @apply w-4 h-4 object-contain;
+  @apply w-4 h-4 bg-current;
+  mask: var(--button-icon-mask) center / contain no-repeat;
+  -webkit-mask: var(--button-icon-mask) center / contain no-repeat;
 }
 
 .button-icon-box {
@@ -108,6 +111,6 @@ const buttonClass = computed(() => {
 }
 
 .button-icon-text {
-  @apply text-primary text-base font-bold leading-none;
+  @apply text-current text-base font-bold leading-none;
 }
 </style>

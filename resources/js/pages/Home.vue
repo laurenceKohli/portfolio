@@ -44,8 +44,8 @@
     <div id="presentation">
       <div id="perso-nav">
         <AppButtonNav icon="projects" label="Mes projets" href="/projects"/>
-        <AppButtonNav icon="skills" label="Compétences" href="/skills"/>   
-        <AppButtonNav icon="cv" label="CV" href="/cv"/>
+        <AppButtonNav icon="skills" label="Compétences" href="#skills-section"/>   
+        <!-- <AppButtonNav icon="cv" label="CV" href="/cv"/> -->
         <AppButtonNav icon="contact" label="Me contacter" href="/contact"/>
       </div>
       <div id="perso-img">
@@ -73,7 +73,7 @@
 
   <section id="skills-section">
     <div id="skills-img">
-      <img src="/img/perso/perso-light.jpg"/>
+      <img src="/img/perso/skills-light.jpg"/>
     </div>
     <div id="skills-details">
       <AppTitleWithIcon icon="skills" color="primary" title="Mes <span>compétences</span>"/>

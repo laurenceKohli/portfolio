@@ -63,7 +63,7 @@
     <TheNav/>
 
     <section id=settings-section>
-        <AppTitleWithIcon icon="cv" color="primary" title="Mon <span>dashboard</span>"/>
+        <AppTitleWithIcon icon="dashboard" color="primary" title="Mon <span>dashboard</span>"/>
         <div id="settings-buttons">
             <AppButtonNav icon="profile" label="Mon profil" href="/settings/profile"/>
             <Link

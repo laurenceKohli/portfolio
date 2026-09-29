@@ -33,7 +33,7 @@
     
     <section id=contact-section>
         <div id="contact-img">
-        <img src="/img/perso/perso-light.jpg"/>
+        <img src="/img/perso/contact-light.jpg"/>
         </div>
 
         <div id="contact-form">
