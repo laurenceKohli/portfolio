@@ -1,7 +1,9 @@
 <script setup>
+    import { router, usePage } from '@inertiajs/vue3';
     import TheNav from '@/components/TheNav.vue';
     import BaseTech from '@/components/BaseTech.vue';
     import AppCarousel from '@/components/AppCarousel.vue';
+    import BaseButton from '@/components/BaseButton.vue';
     
     const props = defineProps({
         project: {
@@ -12,6 +14,14 @@
 
     const carrouselEvent = {
         images: props.project.imgs.map(img => img.img_path),
+    }
+
+    const page = usePage()
+    const editProject = () => router.visit(`/projects/${props.project.id}/edit`)
+    const deleteProject = () => {
+        if (window.confirm(`Supprimer le projet « ${props.project.title} » ?`)) {
+            router.delete(`/projects/${props.project.id}`)
+        }
     }
 
     const goBack = () => {
@@ -41,6 +51,17 @@
     <div>
         <p class="project-tag">{{ project.tag.name }}</p>
         <h1 class="text-primary">{{ project.title }}</h1>
+        <BaseButton
+            v-if="page.props.auth?.user"
+            label="Modifier"
+            @click="editProject"
+        />
+        <BaseButton
+            v-if="page.props.auth?.user"
+            label="Supprimer"
+            color="primary-line"
+            @click="deleteProject"
+        />
 
         <div id="project-summary">
             <div id="project-techs">
@@ -102,6 +123,7 @@
     #project > div:last-child {
         @apply md:col-start-1 md:row-start-1 md:w-full;
     }
+    
     .project-tag {
         @apply text-xs text-onSurface2 py-1 md:py-2;
     }
