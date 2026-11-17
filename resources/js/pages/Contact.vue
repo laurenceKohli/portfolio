@@ -15,7 +15,7 @@
         message: '',
     });
 
-    const email = ['contact', '@', 'votre-site.com'].join('');
+    const email = ['contact', '@', 'lkohli.ch'].join('');
     const emailHref = `mailto:${email}`;
 </script>
 

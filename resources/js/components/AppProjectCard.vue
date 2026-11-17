@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { router } from '@inertiajs/vue3'
 import BaseButton from './BaseButton.vue'
 import BaseTech from './BaseTech.vue'
 
@@ -33,10 +34,13 @@ if (props.project.imgs) {
     img.value = "VaudSentiers-1"
 }
 
+const openDemo = () => window.open(props.project.url, '_blank', 'noopener,noreferrer')
+const openProject = () => router.visit(`/projects/${props.project.id}`)
+
 </script>
 
 <template>
-  <div class="project-card">
+  <div class="project-card" role="link" tabindex="0" :aria-label="`Voir le projet ${props.project.title}`" @click="openProject" @keydown.enter.self="openProject">
     <img class="project-image" :src="`/img/projects/${img}`" />
     <div class="project-content">
       <div class="project-text-block">
@@ -47,11 +51,11 @@ if (props.project.imgs) {
         </div>
       </div>
       <div class="project-techs">
-        <BaseTech v-for="(tech, index) in props.project.techs" :key="`${tech}-${index}`" :label="tech.name" />
+        <BaseTech v-for="(tech, index) in props.project.techs.slice(0, 5)" :key="`${tech}-${index}`" :label="tech.name" />
       </div>
       <div class="project-actions">
-        <BaseButton @click="$inertia.visit(`/projects/${props.project.id}`)" :label="props.detailsLabel" :color="props.detailsLabelColor" />
-        <BaseButton v-if="props.project.url" @click="$inertia.visit(props.project.url)" :label="props.demoLabel" :color="props.demoLabelColor" />
+        <BaseButton @click.stop="openProject" :label="props.detailsLabel" :color="props.detailsLabelColor" />
+        <BaseButton v-if="props.project.url" @click.stop="openDemo" :label="props.demoLabel" :color="props.demoLabelColor" />
       </div>
     </div>
   </div>
@@ -61,7 +65,7 @@ if (props.project.imgs) {
   @reference "#app.css";
 
   .project-card {
-    @apply w-96 inline-flex flex-col justify-start items-start overflow-hidden rounded-lg;
+    @apply w-96 inline-flex flex-col justify-start items-start overflow-hidden rounded-lg cursor-pointer;
     box-shadow: var(--shadow-box);
   }
 
@@ -81,8 +85,17 @@ if (props.project.imgs) {
     @apply w-full text-center text-base font-semibold leading-6;
   }
 
+  .project-description {
+    @apply w-full text-xs font-normal leading-4 text-onSurface2;
+  }
+
+  .project-description :deep(*) {
+    font-size: inherit !important;
+    line-height: inherit;
+  }
+
   .project-description :deep(> p) {
-    @apply text-xs font-normal leading-4 text-onSurface2 pb-1;
+    @apply pb-1;
   }
 
   .project-techs {
