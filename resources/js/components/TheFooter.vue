@@ -10,7 +10,7 @@
 					<span class="brand-mark" aria-hidden="true">#</span>
 					<span>Laurence Kohli</span>
 				</a>
-				<p>Un projet qui donne du sens</p>
+				<p></p>
 			</section>
 
 			<nav class="footer-group" aria-label="Navigation de pied de page">
@@ -19,7 +19,9 @@
 					<a href="/">Accueil</a>
 					<a href="/projects">Projets</a>
 					<a href="/#perso-section">À propos</a>
-					<a href="/contact">Contact</a>
+					<a href="/skills">Compétences</a>
+                    <a href="/contact">Contact</a>
+					
 				</div>
 			</nav>
 

@@ -10,6 +10,7 @@
     import BaseTextInput from '@/components/BaseTextInput.vue';
     import AppProjectLine from '@/components/AppProjectLine.vue';
     import BaseFiltre from '@/components/BaseFiltre.vue';
+    import AppSkillLine from '@/components/AppSkillLine.vue';
 
     const user = usePage().props.auth.user
 
@@ -30,6 +31,14 @@
         tags: {
             type: Array,
             default:() => [],
+        },
+        skills: {
+            type: Array,
+            default: () => [],
+        },
+        skillCategories: {
+            type: Array,
+            default: () => [],
         },
     });
 
@@ -54,6 +63,24 @@
             ].join(' ').toLocaleLowerCase('fr')
 
             return matchesTag && searchableText.includes(query)
+        })
+    })
+
+    const skillSearch = ref('')
+    const selectedSkillCategoryId = ref(null)
+    const skillFilters = computed(() => [
+        { id: null, name: 'Toutes' },
+        ...props.skillCategories,
+    ])
+    const filteredSkills = computed(() => {
+        const query = skillSearch.value.trim().toLocaleLowerCase('fr')
+
+        return props.skills.filter((skill) => {
+            const matchesCategory = selectedSkillCategoryId.value === null
+                || skill.category_id === selectedSkillCategoryId.value
+            const searchableText = `${skill.name} ${skill.category?.name ?? ''}`.toLocaleLowerCase('fr')
+
+            return matchesCategory && searchableText.includes(query)
         })
     })
 
@@ -118,6 +145,27 @@
         />
     </section>
 
+    <section id="skills-section">
+        <div class="projects-heading">
+            <h2>Mes compétences</h2>
+            <p>{{ filteredSkills.length }} compétence{{ filteredSkills.length > 1 ? 's' : '' }}</p>
+        </div>
+        <div class="skill-controls">
+            <BaseTextInput id="skill-search" v-model="skillSearch" placeholder="Rechercher une compétence..." />
+            <div class="skill-filters" role="group" aria-label="Filtrer les compétences par catégorie">
+                <BaseFiltre
+                    v-for="category in skillFilters"
+                    :key="category.id ?? 'all-skills'"
+                    :tag="category"
+                    :selected="selectedSkillCategoryId === category.id"
+                    @select="selectedSkillCategoryId = $event.id"
+                />
+            </div>
+        </div>
+        <AppSkillLine v-for="skill in filteredSkills" :key="skill.id" :skill="skill" />
+        <p v-if="filteredSkills.length === 0" class="empty-state">Aucune compétence trouvée.</p>
+    </section>
+
 </template>
 
 <style scoped>
@@ -147,5 +195,21 @@
 
     .projects-heading {
         @apply mb-3 flex flex-wrap items-center justify-between gap-3;
+    }
+
+    #skills-section {
+        @apply mt-16;
+    }
+
+    .skill-controls {
+        @apply mb-4 grid gap-3;
+    }
+
+    .skill-filters {
+        @apply flex flex-wrap gap-2;
+    }
+
+    .empty-state {
+        @apply py-6 text-center text-sm text-onSurface2;
     }
 </style>

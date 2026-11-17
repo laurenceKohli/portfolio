@@ -26,7 +26,7 @@ class HomeController extends Controller
 
         $allProjects = $allProjects->select('id', 'title', 'desc', 'imgs', 'techs', 'url');
 
-        $allTechs = Tech::all()->select('id', 'logo_path', 'name');
+         $allTechs = Tech::where('on_home_page', true)->get(['id', 'logo_path', 'name']);
 
         return Inertia::render('Home', [
             'projects' => $allProjects,

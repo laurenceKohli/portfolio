@@ -83,6 +83,7 @@
       <div id="skills">
         <AppCompetence v-for="skill in skills" :key="skill.id" :icon="skill.logo_path" :label="skill.name"/>
       </div>
+      <BaseButton @click="$inertia.visit(`/skills`)" label="Voir toutes mes compétences" color="secondary-line" size="full" />
     </div>
   </section>
 </template>

@@ -32,6 +32,7 @@
     const navLinks = [
         { icon: 'home', href: '/', label: 'Accueil' },
         { icon: 'projects', href: '/projects', label: 'Mes projets' },
+        { icon: 'skills', href: '/skills', label: 'Compétences' },
         { icon: 'contact', href: '/contact', label: 'Me contacter' },
     ]
 

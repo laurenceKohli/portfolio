@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Exp;
+use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Tech;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +34,11 @@ class ProjectController extends Controller
         return Inertia::render('Dashboard', [
             'projects' => Project::with('techs', 'tag')->get(),
             'tags' => Tag::all(),
+            'skills' => Tech::with([
+                'category',
+                'projects' => fn ($query) => $query->select('table_projects.id', 'title'),
+            ])->orderBy('name')->get(),
+            'skillCategories' => Category::orderBy('name')->get(),
         ]);
     }
 
