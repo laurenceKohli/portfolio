@@ -86,6 +86,7 @@
 html {
     box-sizing: border-box;
     scrollbar-width: none;
+    @apply bg-surface dark:bg-surface;
 }
 
 * {
@@ -96,6 +97,7 @@ body {
     @apply font-sans antialiased text-text dark:text-text;
     @apply bg-surface dark:bg-surface;
     @apply container mx-4 my-2 lg:my-4 lg:mx-auto;
+    @apply h-full;
 }
 
 h1 {
